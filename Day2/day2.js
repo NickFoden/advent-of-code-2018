@@ -1,20 +1,29 @@
-const checkSum = () => {
-  return 0;
+const checkSum = data => {
+  let doubles = 0;
+  let triples = 0;
+  const checkItem = letters => {
+    let results = {};
+    let doub = false;
+    let trip = false;
+    letters.forEach(char =>
+      results[char] ? (results[char] = results[char] + 1) : (results[char] = 1)
+    );
+    for (let item in results) {
+      if (results[item] === 2 && !doub) {
+        doubles += 1;
+        doub = true;
+      }
+      if (results[item] === 3 && !trip) {
+        triples += 1;
+        trip = true;
+      }
+    }
+  };
+  for (let item in data) {
+    const letters = Array.from(data[item]);
+    checkItem(letters);
+  }
+  return doubles * triples;
 };
 
 module.exports = checkSum;
-
-// To make sure you didn't miss any, you scan the likely candidate boxes again, counting the number that have an ID containing exactly two of any letter and then separately counting those with exactly three of any letter. You can multiply those two counts together to get a rudimentary checksum and compare it to what your device predicts.
-
-// For example, if you see the following box IDs:
-
-// abcdef contains no letters that appear exactly two or three times.
-// bababc contains two a and three b, so it counts for both.
-// abbcde contains two b, but no letter appears exactly three times.
-// abcccd contains three c, but no letter appears exactly two times.
-// aabcdd contains two a and two d, but it only counts once.
-// abcdee contains two e.
-// ababab contains three a and three b, but it only counts once.
-// Of these box IDs, four of them contain a letter which appears exactly twice, and three of them contain a letter which appears exactly three times. Multiplying these together produces a checksum of 4 * 3 = 12.
-
-// What is the checksum for your list of box IDs?
