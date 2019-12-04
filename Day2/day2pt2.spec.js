@@ -13,6 +13,6 @@ const TEST_ONE = [
 
 describe("Day 2", () => {
   test("Part 2", () => {
-    expect(checkSum(DATA)).toEqual("fgij");
+    expect(checkSum(DATA)).toEqual("omlvgdokxfncvqyersasjziup");
   });
 });
